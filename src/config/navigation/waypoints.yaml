@@ -1,0 +1,120 @@
+route_direction: clockwise
+default_pass_radius: 0.35
+default_reverse_pass_radius: 0.2
+routes:
+  counterclockwise:
+  - name: point_01
+    x: 3.67553
+    y: 0.936773
+    yaw: 0.773551
+    pass_radius: 0.5
+  - name: point_02
+    x: 3.70349
+    y: 0.265574
+    yaw: 2.420
+    pass_radius: 0.8
+    reverse: true
+    reverse_pass_radius: 0.8
+  - name: point_03
+    x: 1.99558
+    y: 2.05074
+    yaw: 1.58014
+    pass_radius: 0.2
+  - name: point_04
+    x: 3.02024
+    y: 2.83244
+    yaw: 0.347281
+    pass_radius: 0.3
+  - name: point_05
+    x: 3.69137
+    y: 3.42338
+    yaw: 1.74952
+    pass_radius: 0.3
+  - name: point_06
+    x: 3.19134
+    y: 4.02191
+    yaw: -3.12768
+    pass_radius: 0.3
+  - name: point_07
+    x: 0.867755
+    y: 4.00106
+    yaw: -2.73309
+    pass_radius: 0.3
+  - name: point_08
+    x: 0.314855
+    y: 3.44663
+    yaw: -0.887551
+    pass_radius: 0.3
+  - name: point_09
+    x: 1.06885
+    y: 2.90271
+    yaw: -0.629513
+    pass_radius: 0.3
+  - name: point_10
+    x: 2.01405
+    y: 1.80581
+    yaw: -2.42143
+    pass_radius: 0.35
+  - name: point_11
+    x: -0.0250597
+    y: -0.0293127
+    yaw: -2.67045
+    pass_radius: 0.35
+  clockwise:
+  - name: point_01
+    x: 3.67553
+    y: 0.936773
+    yaw: 0.773551
+    pass_radius: 0.5
+  - name: point_02
+    x: 3.70349
+    y: 0.265574
+    yaw: 2.420
+    pass_radius: 0.8
+    reverse: true
+    reverse_pass_radius: 0.8
+  - name: point_03
+    x: 1.99558
+    y: 2.05074
+    yaw: 1.58014
+    pass_radius: 0.2
+  - name: point_04
+    x: 0.578839
+    y: 2.87515
+    yaw: 2.35768
+    pass_radius: 0.3
+  - name: point_05
+    x: 0.251184
+    y: 3.35566
+    yaw: 1.18872
+    pass_radius: 0.3
+  - name: point_06
+    x: 0.822357
+    y: 4.0191
+    yaw: -0.00563454
+    pass_radius: 0.3
+  - name: point_07
+    x: 3.2005
+    y: 4.03108
+    yaw: -0.45019
+    pass_radius: 0.3
+  - name: point_08
+    x: 3.78212
+    y: 3.45074
+    yaw: -2.12141
+    pass_radius: 0.3
+  - name: point_09
+    x: 2.99293
+    y: 2.85076
+    yaw: -2.61528
+    pass_radius: 0.3
+  - name: point_10
+    x: 2.01389
+    y: 1.92361
+    yaw: -2.33446
+    pass_radius: 0.35
+  - name: point_11
+    x: -0.0250597
+    y: -0.0293127
+    yaw: -2.67045
+    pass_radius: 0.35

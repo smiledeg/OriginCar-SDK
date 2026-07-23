@@ -1,0 +1,50 @@
+<launch>
+  <arg name="carto_slam" default="false"/>
+  <arg name="start_camera" default="false"/>
+  <arg name="use_sim_time" default="false"/>
+  <arg name="base_usart_port_name" default="/dev/ttyACM0"/>
+  <arg name="base_serial_baud_rate" default="115200"/>
+  <arg name="lidar_type" default="vp100"/>
+  <arg name="start_vp100_lidar" default="true"/>
+  <arg name="start_n10_lidar" default="false"/>
+  <arg name="lidar_serial_port" default="/dev/ttyACM1"/>
+  <arg name="camera_device" default="/dev/video0"/>
+
+  <include file="$(find-pkg-share origincar_base)/launch/base_serial.launch.xml">
+    <arg name="akmcar" value="false"/>
+    <arg name="use_sim_time" value="$(var use_sim_time)"/>
+    <arg name="usart_port_name" value="$(var base_usart_port_name)"/>
+    <arg name="serial_baud_rate" value="$(var base_serial_baud_rate)"/>
+  </include>
+
+  <node pkg="tf2_ros" exec="static_transform_publisher" name="base_to_link" args="--x 0 --y 0 --z 0 --roll 0 --pitch 0 --yaw 0 --frame-id base_footprint --child-frame-id base_link">
+    <param name="use_sim_time" value="$(var use_sim_time)"/>
+  </node>
+  <node pkg="tf2_ros" exec="static_transform_publisher" name="base_to_gyro" args="--x 0 --y 0 --z 0 --roll 0 --pitch 0 --yaw 0 --frame-id base_footprint --child-frame-id gyro_link">
+    <param name="use_sim_time" value="$(var use_sim_time)"/>
+  </node>
+  <node pkg="joint_state_publisher" exec="joint_state_publisher" name="joint_state_publisher">
+    <param name="use_sim_time" value="$(var use_sim_time)"/>
+  </node>
+
+  <include file="$(find-pkg-share origincar_base)/launch/robot_mode_description.launch.xml">
+    <arg name="use_sim_time" value="$(var use_sim_time)"/>
+  </include>
+
+  <node unless="$(var carto_slam)" pkg="robot_localization" exec="ekf_node" output="screen">
+    <param name="use_sim_time" value="$(var use_sim_time)"/>
+    <param from="$(env ORIGINCAR_RESOURCES)/base/ekf.yaml"/>
+    <remap from="odometry/filtered" to="odom_combined"/>
+  </node>
+
+  <include if="$(var start_n10_lidar)" file="$(find-pkg-share lslidar_driver)/launch/lsn10_launch.xml">
+    <arg name="use_sim_time" value="$(var use_sim_time)"/>
+    <arg name="serial_port" value="$(var lidar_serial_port)"/>
+  </include>
+  <include if="$(var start_vp100_lidar)" file="$(find-pkg-share vp100_ros2)/launch/vp100_launch.py"/>
+  <include if="$(var start_camera)" file="$(find-pkg-share hobot_usb_cam)/launch/hobot_usb_cam.launch.py">
+    <arg name="usb_image_width" value="1920"/>
+    <arg name="usb_image_height" value="1080"/>
+    <arg name="usb_video_device" value="$(var camera_device)"/>
+  </include>
+</launch>

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+SDK_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export START_CAMERA="${START_CAMERA:-1}"
+exec bash "${SDK_ROOT}/bin/start_navigation" "$@"

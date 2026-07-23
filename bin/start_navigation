@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+SDK_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PAYLOAD="${SDK_ROOT}/libexec/start_navigation.runtime.gz"
+
+if [[ ! -r "${PAYLOAD}" ]]; then
+  echo "[origincar_sdk] Missing runtime payload: ${PAYLOAD}" >&2
+  exit 1
+fi
+
+export ORIGINCAR_SDK_ROOT="${SDK_ROOT}"
+gzip -dc "${PAYLOAD}" | bash -s -- "$@"
